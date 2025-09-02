@@ -1,0 +1,39 @@
+spring:
+  # Docker Database Configuration
+  datasource:
+    url: jdbc:postgresql://postgres:5432/kong_ai_books
+    username: postgres
+    password: password
+  
+  # Docker Redis Configuration
+  data:
+    redis:
+      host: redis
+      port: 6379
+  
+  # AI Configuration for Docker
+  ai:
+    vectorstore:
+      chroma:
+        client:
+          host: chroma
+          port: 8000
+
+# Docker Server Configuration
+server:
+  port: 8080
+  address: 0.0.0.0
+
+# Docker Logging
+logging:
+  level:
+    com.kong.aibooks: INFO
+    org.springframework.ai: INFO
+
+# Docker App Configuration
+app:
+  cors:
+    allowed-origins: http://frontend:3000,http://localhost:3000
+  
+  file:
+    upload-dir: /app/storage
