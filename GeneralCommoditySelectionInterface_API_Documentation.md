@@ -53,14 +53,14 @@
 
 ## 接口方法列表
 
-| 序号 | 方法名称 | 英文方法名 | 访问权限 | 功能描述 |
-|------|----------|------------|----------|----------|
-| 1 | 查询热销商品列表-游客 | `getHotCommoditysPublic` | 公开访问 | 获取热销商品列表，无需登录 |
-| 2 | 查询热销商品列表-登录不鉴权 | `getHotCommoditysAuth` | 需要登录 | 获取热销商品列表，需要登录 |
-| 3 | 查询商品分页列表-游客 | `getCommodityPagePublic` | 公开访问 | 分页查询商品列表，无需登录 |
-| 4 | 查询商品分页列表-登录用户 | `getCommodityPageAuth` | 需要登录 | 分页查询商品列表，需要登录 |
-| 5 | 查询商品详情-游客 | `getCommodityDetailPublic` | 公开访问 | 查询商品详细信息，无需登录 |
-| 6 | 查询商品详情-登录用户 | `getCommodityDetailAuth` | 需要登录 | 查询商品详细信息，需要登录 |
+| 序号 | 方法名称 | 英文方法名 | 接口地址 | 访问权限 | 功能描述 |
+|------|----------|------------|----------|----------|----------|
+| 1 | 查询热销商品列表-游客 | `getHotCommoditysPublic` | `/commodity/dc/selection/hot/commoditys/public` | 公开访问 | 获取热销商品列表，无需登录 |
+| 2 | 查询热销商品列表-登录不鉴权 | `getHotCommoditysAuth` | `/commodity/dc/selection/hot/commoditys/auth` | 需要登录 | 获取热销商品列表，需要登录 |
+| 3 | 查询商品分页列表-游客 | `getCommodityPagePublic` | - | 公开访问 | 分页查询商品列表，无需登录 |
+| 4 | 查询商品分页列表-登录用户 | `getCommodityPageAuth` | - | 需要登录 | 分页查询商品列表，需要登录 |
+| 5 | 查询商品详情-游客 | `getCommodityDetailPublic` | - | 公开访问 | 查询商品详细信息，无需登录 |
+| 6 | 查询商品详情-登录用户 | `getCommodityDetailAuth` | - | 需要登录 | 查询商品详细信息，需要登录 |
 
 ---
 
@@ -71,6 +71,7 @@
 #### 基本信息
 - **方法名称**: 查询热销商品列表-游客
 - **英文方法名**: `getHotCommoditysPublic`
+- **接口地址**: `/commodity/dc/selection/hot/commoditys/public`
 - **访问权限**: 公开访问（无需认证）
 - **请求方式**: POST
 - **功能描述**: 获取指定店铺的热销商品列表，适用于游客用户
@@ -122,6 +123,7 @@
 #### 基本信息
 - **方法名称**: 查询热销商品列表-登录不鉴权
 - **英文方法名**: `getHotCommoditysAuth`
+- **接口地址**: `/commodity/dc/selection/hot/commoditys/auth`
 - **访问权限**: 需要登录（无需特殊授权）
 - **请求方式**: POST
 - **功能描述**: 获取指定店铺的热销商品列表，适用于已登录用户
