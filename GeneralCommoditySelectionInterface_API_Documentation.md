@@ -306,7 +306,7 @@
 ### 3.4 查询商品分页列表-登录用户
 
 #### 基本信息
-- **方法名称**: 查询商品分页列表-登录用户
+- **方法名称**: 查询商品分页列表-登录不鉴权
 - **英文方法名**: `getCommodityPageAuth`
 - **接口地址**: `/commodity/dc/selection/page/auth`
 - **访问权限**: 需要登录（无需特殊授权）
@@ -314,10 +314,124 @@
 - **功能描述**: 分页查询商品列表，支持多维度筛选和排序，适用于已登录用户
 
 #### 请求参数
-与游客版本相同，请参考 [3.3 查询商品分页列表-游客](#33-查询商品分页列表-游客) 的请求参数。
+
+| 参数名称 | 数据类型 | 是否必填 | 参数描述 | 示例值 |
+|----------|----------|----------|----------|--------|
+| current | Integer | 是 | 当前页码 | 1 |
+| size | Integer | 是 | 每页条数 | 20 |
+| sortType | Integer | 是 | 排序类型：0=综合排序，1=价格升序，2=价格降序，3=销量排序 | 0 |
+| commodityLineId | String | 否 | 产品线ID（空值查询全部） | "LINE001" |
+| middleCategoryId | String | 否 | 中类ID（空值查询全部） | "MID001" |
+| minCategoryId | String | 否 | 小类ID（空值查询全部） | "MIN001" |
+| businessLineType | Integer | 否 | 业务线类型：0=润滑油，1=燃油等 | 0 |
+| appIndustryId | String | 否 | 应用行业ID | "IND001" |
+| keyword | String | 否 | 搜索关键字 | "机油" |
+| brandName | String | 否 | 商品品牌 | "品牌A" |
+| inStock | Boolean | 否 | 是否显示有货，默认不选中 | true |
+| salStockMin | Integer | 否 | 商品销量（最小） | 100 |
+| salStockMax | Integer | 否 | 商品销量（最大） | 1000 |
+| salePriceMin | Decimal | 否 | 商品售价（最小） | 100.00 |
+| salePriceMax | Decimal | 否 | 商品售价（最大） | 500.00 |
+| sortField | String | 否 | 排序字段：shelfTime=上架日期（默认），salStock=销量，commentsCount=评论数，salePrice=售价 | "shelfTime" |
+| firstScn | String | 否 | 一级目录查询 | "一级目录" |
+| secondScn | String | 否 | 二级目录查询 | "二级目录" |
+| thirdScn | String | 否 | 三级目录查询 | "三级目录" |
+| thirdScId | String | 否 | 三级目录ID | "THIRD001" |
 
 #### 响应参数
-与游客版本相同，请参考 [3.3 查询商品分页列表-游客](#33-查询商品分页列表-游客) 的响应参数。
+
+**分页信息**
+| 参数名称 | 数据类型 | 参数描述 | 示例值 |
+|----------|----------|----------|--------|
+| pageNo | Integer | 当前页码 | 1 |
+| pageSize | Integer | 每页条数 | 20 |
+| totalPage | Integer | 总页数 | 5 |
+| totalRows | Integer | 总记录数 | 100 |
+| rows | Array | 商品数据列表（CommodityPageRespDto） | - |
+
+**商品信息（CommodityPageRespDto - rows数组中的对象）**
+| 参数名称 | 数据类型 | 参数描述 | 示例值 |
+|----------|----------|----------|--------|
+| imageKey | String | 商品图片key | "IMG001" |
+| commodityId | String | 商品ID | "PROD001" |
+| shopId | String | 店铺ID | "SHOP001" |
+| brandName | String | 品牌名称 | "品牌A" |
+| brandNameKw | String | 品牌名称支持模糊查询 | "品牌A" |
+| stock | Integer | 总库存数 | 500 |
+| salStock | Integer | 销售库存 | 300 |
+| salePrice | Decimal | 商品价格 | 299.99 |
+| name | String | 商品名称 | "高级机油" |
+| isFollow | Boolean | 是否关注该商品 | false |
+
+**新特产品列表兼容字段信息**
+| 参数名称 | 数据类型 | 参数描述 | 示例值 |
+|----------|----------|----------|--------|
+| feature | String | 商品特性 | "高性能" |
+
+**VIC专属交易大厅商品列表兼容字段信息**
+| 参数名称 | 数据类型 | 参数描述 | 示例值 |
+|----------|----------|----------|--------|
+| materialCode | String | 物料编码 | "MAT001" |
+| commodityCode | String | 商品编码 | "COM001" |
+| guidePrice | Decimal | 商品销售指导价 | 299.99 |
+| memberPrice | Decimal | 商品会员价格 | 279.99 |
+
+#### 请求示例
+```json
+{
+  "current": 1,
+  "size": 20,
+  "sortType": 0,
+  "commodityLineId": "LINE001",
+  "middleCategoryId": null,
+  "minCategoryId": null,
+  "businessLineType": 0,
+  "appIndustryId": "IND001",
+  "keyword": "机油",
+  "brandName": "品牌A",
+  "inStock": true,
+  "salStockMin": 100,
+  "salStockMax": 1000,
+  "salePriceMin": 100.00,
+  "salePriceMax": 500.00,
+  "sortField": "shelfTime",
+  "firstScn": null,
+  "secondScn": null,
+  "thirdScn": null,
+  "thirdScId": null
+}
+```
+
+#### 响应示例
+```json
+{
+  "code": 200,
+  "message": "成功",
+  "pageNo": 1,
+  "pageSize": 20,
+  "totalPage": 5,
+  "totalRows": 100,
+  "rows": [
+    {
+      "imageKey": "IMG001",
+      "commodityId": "PROD001",
+      "shopId": "SHOP001",
+      "brandName": "品牌A",
+      "brandNameKw": "品牌A",
+      "stock": 500,
+      "salStock": 300,
+      "salePrice": 299.99,
+      "name": "高级机油",
+      "isFollow": false,
+      "feature": "高性能",
+      "materialCode": "MAT001",
+      "commodityCode": "COM001",
+      "guidePrice": 299.99,
+      "memberPrice": 279.99
+    }
+  ]
+}
+```
 
 ---
 
